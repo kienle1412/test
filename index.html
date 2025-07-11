@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Surprise for You! 🌸</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+        
         * {
             margin: 0;
             padding: 0;
@@ -12,166 +14,49 @@
         }
         
         body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, 
+                #667eea 0%, 
+                #764ba2 25%, 
+                #f093fb 50%, 
+                #f5576c 75%, 
+                #4facfe 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 8s ease infinite;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             overflow: hidden;
-        }
-        
-        .container {
-            text-align: center;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            backdrop-filter: blur(10px);
-            transform: scale(0);
-            animation: popIn 0.8s ease-out 0.5s forwards;
             position: relative;
         }
         
-        .surprise-flower {
-            position: fixed;
-            font-size: 60px;
-            z-index: 1000;
-            pointer-events: none;
-            opacity: 0;
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
         
-        .surprise-appear {
-            animation: surpriseAppear 2s ease-out forwards;
-        }
-        
-        @keyframes surpriseAppear {
-            0% {
-                opacity: 0;
-                transform: scale(0) rotate(0deg);
-            }
-            50% {
-                opacity: 1;
-                transform: scale(1.5) rotate(180deg);
-            }
-            100% {
-                opacity: 0;
-                transform: scale(0.5) rotate(360deg);
-            }
-        }
-        
-        .flower-explosion {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            pointer-events: none;
-        }
-        
-        .explosion-flower {
-            position: absolute;
-            font-size: 40px;
-            animation: explode 1.5s ease-out forwards;
-        }
-        
-        @keyframes explode {
-            0% {
-                opacity: 1;
-                transform: translate(0, 0) scale(0);
-            }
-            50% {
-                opacity: 1;
-                transform: translate(var(--x), var(--y)) scale(1.2);
-            }
-            100% {
-                opacity: 0;
-                transform: translate(var(--x), var(--y)) scale(0.3);
-            }
-        }
-        
-        @keyframes popIn {
-            0% {
-                transform: scale(0);
-                opacity: 0;
-            }
-            80% {
-                transform: scale(1.1);
-            }
-            100% {
-                transform: scale(1);
-                opacity: 1;
-            }
-        }
-        
-        .flower-display {
-            font-size: 120px;
-            margin: 20px 0;
-            animation: bounce 2s infinite;
-        }
-        
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {
-                transform: translateY(0);
-            }
-            40% {
-                transform: translateY(-20px);
-            }
-            60% {
-                transform: translateY(-10px);
-            }
-        }
-        
-        .flower-name {
-            font-size: 2.5em;
-            color: #2c3e50;
-            margin: 20px 0;
-            font-weight: bold;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        
-        .message {
-            font-size: 1.3em;
-            color: #555;
-            margin: 20px 0;
-            line-height: 1.6;
-        }
-        
-        .refresh-btn {
-            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            font-size: 1.1em;
-            border-radius: 50px;
-            cursor: pointer;
-            margin-top: 20px;
-            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
-            transition: all 0.3s ease;
-        }
-        
-        .refresh-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
-        }
-        
-        .floating-hearts {
+        .magic-particles {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             pointer-events: none;
-            z-index: -1;
+            z-index: 1;
         }
         
-        .heart {
+        .particle {
             position: absolute;
-            color: #ff69b4;
-            font-size: 20px;
-            animation: float 4s linear infinite;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            animation: float-particles 6s linear infinite;
         }
         
-        @keyframes float {
+        @keyframes float-particles {
             0% {
                 transform: translateY(100vh) rotate(0deg);
                 opacity: 0;
@@ -188,26 +73,369 @@
             }
         }
         
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            border-radius: 25px;
+            padding: 2rem;
+            margin: 1rem;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transform: scale(0);
+            animation: popIn 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.5s forwards;
+            position: relative;
+            z-index: 2;
+            max-width: 90vw;
+            width: 100%;
+            max-width: 400px;
+        }
+        
+        @keyframes popIn {
+            0% {
+                transform: scale(0) rotate(-180deg);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.1) rotate(0deg);
+            }
+            100% {
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }
+        }
+        
+        .flower-display {
+            font-size: clamp(80px, 15vw, 120px);
+            margin: 1rem 0;
+            animation: 
+                bounce 2s ease-in-out infinite,
+                glow 3s ease-in-out infinite alternate,
+                rotate-flower 4s linear infinite;
+            filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.5));
+            position: relative;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0) scale(1);
+            }
+            40% {
+                transform: translateY(-15px) scale(1.1);
+            }
+            60% {
+                transform: translateY(-8px) scale(1.05);
+            }
+        }
+        
+        @keyframes glow {
+            0% {
+                filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.5));
+            }
+            100% {
+                filter: drop-shadow(0 0 40px rgba(255, 255, 255, 0.8));
+            }
+        }
+        
+        @keyframes rotate-flower {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .flower-name {
+            font-size: clamp(1.5rem, 5vw, 2.5rem);
+            color: #ffffff;
+            margin: 1rem 0;
+            font-weight: 700;
+            text-shadow: 
+                0 0 10px rgba(255, 255, 255, 0.5),
+                0 0 20px rgba(255, 255, 255, 0.3),
+                0 0 30px rgba(255, 255, 255, 0.2);
+            animation: textGlow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes textGlow {
+            0% {
+                text-shadow: 
+                    0 0 10px rgba(255, 255, 255, 0.5),
+                    0 0 20px rgba(255, 255, 255, 0.3),
+                    0 0 30px rgba(255, 255, 255, 0.2);
+            }
+            100% {
+                text-shadow: 
+                    0 0 20px rgba(255, 255, 255, 0.8),
+                    0 0 30px rgba(255, 255, 255, 0.6),
+                    0 0 40px rgba(255, 255, 255, 0.4);
+            }
+        }
+        
+        .message {
+            font-size: clamp(1rem, 3vw, 1.3rem);
+            color: rgba(255, 255, 255, 0.9);
+            margin: 1.5rem 0;
+            line-height: 1.6;
+            font-weight: 300;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .message p {
+            margin-bottom: 0.5rem;
+            animation: slideIn 1s ease-out forwards;
+            opacity: 0;
+        }
+        
+        .message p:nth-child(1) { animation-delay: 1s; }
+        .message p:nth-child(2) { animation-delay: 1.5s; }
+        
+        @keyframes slideIn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .refresh-btn {
+            background: linear-gradient(45deg, #ff6b6b, #ff8e8e, #ffa8a8);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: clamp(1rem, 3vw, 1.2rem);
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 1rem;
+            box-shadow: 
+                0 8px 25px rgba(255, 107, 107, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .refresh-btn::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transform: rotate(45deg);
+            transition: all 0.5s;
+            opacity: 0;
+        }
+        
+        .refresh-btn:hover::before {
+            animation: shimmer 1s ease-in-out;
+        }
+        
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) rotate(45deg); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateX(100%) rotate(45deg); opacity: 0; }
+        }
+        
+        .refresh-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 
+                0 15px 35px rgba(255, 107, 107, 0.6),
+                inset 0 1px 0 rgba(255, 255, 255, 0.4);
+        }
+        
+        .refresh-btn:active {
+            transform: translateY(-2px) scale(1.02);
+        }
+        
+        .surprise-flower {
+            position: fixed;
+            font-size: clamp(40px, 8vw, 80px);
+            z-index: 1000;
+            pointer-events: none;
+            opacity: 0;
+            filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.8));
+        }
+        
+        .surprise-appear {
+            animation: megaSurprise 3s ease-out forwards;
+        }
+        
+        @keyframes megaSurprise {
+            0% {
+                opacity: 0;
+                transform: scale(0) rotate(0deg);
+            }
+            20% {
+                opacity: 1;
+                transform: scale(1.5) rotate(180deg);
+            }
+            40% {
+                transform: scale(1.2) rotate(360deg);
+            }
+            60% {
+                transform: scale(1.8) rotate(540deg);
+            }
+            80% {
+                transform: scale(1) rotate(720deg);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(0.3) rotate(900deg);
+            }
+        }
+        
+        .flower-explosion {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+        }
+        
+        .explosion-flower {
+            position: absolute;
+            font-size: clamp(30px, 6vw, 50px);
+            animation: megaExplode 2s ease-out forwards;
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.6));
+        }
+        
+        @keyframes megaExplode {
+            0% {
+                opacity: 1;
+                transform: translate(0, 0) scale(0) rotate(0deg);
+            }
+            30% {
+                opacity: 1;
+                transform: translate(var(--x), var(--y)) scale(1.5) rotate(180deg);
+            }
+            70% {
+                opacity: 1;
+                transform: translate(var(--x), var(--y)) scale(1.2) rotate(360deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(var(--x), var(--y)) scale(0.2) rotate(540deg);
+            }
+        }
+        
+        .floating-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .heart {
+            position: absolute;
+            color: #ff69b4;
+            font-size: clamp(16px, 4vw, 24px);
+            animation: floatHeart 6s linear infinite;
+            filter: drop-shadow(0 0 8px rgba(255, 105, 180, 0.5));
+        }
+        
+        @keyframes floatHeart {
+            0% {
+                transform: translateY(100vh) rotate(0deg) scale(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+                transform: translateY(90vh) rotate(36deg) scale(1);
+            }
+            90% {
+                opacity: 1;
+                transform: translateY(10vh) rotate(324deg) scale(1.2);
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg) scale(0);
+                opacity: 0;
+            }
+        }
+        
         .sparkle {
             position: absolute;
             color: #ffd700;
-            font-size: 16px;
-            animation: sparkle 3s ease-in-out infinite;
+            font-size: clamp(12px, 3vw, 20px);
+            animation: megaSparkle 3s ease-in-out infinite;
+            filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.8));
         }
         
-        @keyframes sparkle {
+        @keyframes megaSparkle {
             0%, 100% {
                 opacity: 0;
-                transform: scale(0);
+                transform: scale(0) rotate(0deg);
+            }
+            25% {
+                opacity: 1;
+                transform: scale(1.5) rotate(90deg);
             }
             50% {
+                opacity: 0.8;
+                transform: scale(1.2) rotate(180deg);
+            }
+            75% {
                 opacity: 1;
-                transform: scale(1);
+                transform: scale(1.8) rotate(270deg);
+            }
+        }
+        
+        /* Mobile optimizations */
+        @media (max-width: 768px) {
+            .container {
+                margin: 0.5rem;
+                padding: 1.5rem;
+            }
+            
+            .flower-display {
+                margin: 0.5rem 0;
+            }
+            
+            .flower-name {
+                margin: 0.5rem 0;
+            }
+            
+            .message {
+                margin: 1rem 0;
+            }
+            
+            .refresh-btn {
+                padding: 12px 24px;
+                margin-top: 0.5rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                margin: 0.25rem;
+                padding: 1rem;
+            }
+        }
+        
+        /* Touch improvements */
+        @media (hover: none) {
+            .refresh-btn:hover {
+                transform: none;
+                box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+            }
+            
+            .refresh-btn:active {
+                transform: scale(0.95);
             }
         }
     </style>
 </head>
 <body>
+    <div class="magic-particles" id="magicParticles"></div>
     <div class="floating-hearts" id="floatingHearts"></div>
     
     <div class="container">
@@ -239,34 +467,34 @@
         let currentFlowerIndex = 0;
         
         function showNewFlower() {
-            // Create surprise flowers first
-            createSurpriseFlowers();
+            // Create mega surprise flowers
+            createMegaSurpriseFlowers();
             
-            // Wait a bit then show main flower
+            // Wait then show main flower with explosion
             setTimeout(() => {
                 const randomIndex = Math.floor(Math.random() * flowers.length);
                 const flower = flowers[randomIndex];
                 
-                // Update display with explosion effect
+                // Update display
                 document.getElementById('flowerDisplay').textContent = flower.emoji;
                 document.getElementById('flowerName').textContent = flower.name;
                 
-                // Create explosion effect
-                createFlowerExplosion();
+                // Create mega explosion
+                createMegaFlowerExplosion();
                 
-                // Reset animation
+                // Reset container animation
                 const container = document.querySelector('.container');
                 container.style.animation = 'none';
                 setTimeout(() => {
-                    container.style.animation = 'popIn 0.8s ease-out forwards';
+                    container.style.animation = 'popIn 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards';
                 }, 10);
-            }, 1000);
+            }, 1500);
         }
         
-        function createSurpriseFlowers() {
-            const surpriseFlowers = ['🌸', '🌺', '🌻', '🌷', '🌹', '🌼'];
+        function createMegaSurpriseFlowers() {
+            const surpriseFlowers = ['🌸', '🌺', '🌻', '🌷', '🌹', '🌼', '🌿', '🍀', '💐', '🌱'];
             
-            for (let i = 0; i < 8; i++) {
+            for (let i = 0; i < 15; i++) {
                 setTimeout(() => {
                     const flower = document.createElement('div');
                     flower.className = 'surprise-flower surprise-appear';
@@ -281,26 +509,26 @@
                     // Remove after animation
                     setTimeout(() => {
                         flower.remove();
-                    }, 2000);
-                }, i * 200);
+                    }, 3000);
+                }, i * 100);
             }
         }
         
-        function createFlowerExplosion() {
+        function createMegaFlowerExplosion() {
             const container = document.querySelector('.container');
             const explosion = document.createElement('div');
             explosion.className = 'flower-explosion';
             
-            const explosionFlowers = ['🌸', '🌺', '🌻', '🌷', '🌹', '🌼', '✨', '💫'];
+            const explosionFlowers = ['🌸', '🌺', '🌻', '🌷', '🌹', '🌼', '✨', '💫', '⭐', '🌟'];
             
-            for (let i = 0; i < 12; i++) {
+            for (let i = 0; i < 20; i++) {
                 const flower = document.createElement('div');
                 flower.className = 'explosion-flower';
                 flower.textContent = explosionFlowers[Math.floor(Math.random() * explosionFlowers.length)];
                 
-                // Random direction
-                const angle = (i * 30) * Math.PI / 180;
-                const distance = 100 + Math.random() * 100;
+                // Circular explosion pattern
+                const angle = (i * 18) * Math.PI / 180;
+                const distance = 80 + Math.random() * 120;
                 const x = Math.cos(angle) * distance;
                 const y = Math.sin(angle) * distance;
                 
@@ -316,33 +544,54 @@
             // Remove explosion after animation
             setTimeout(() => {
                 explosion.remove();
-            }, 2000);
+            }, 2500);
+        }
+        
+        function createMegaSparkles() {
+            const container = document.querySelector('.container');
+            const sparkleEmojis = ['✨', '💫', '⭐', '🌟', '💖', '💝'];
+            
+            for (let i = 0; i < 8; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                sparkle.textContent = sparkleEmojis[Math.floor(Math.random() * sparkleEmojis.length)];
+                sparkle.style.left = Math.random() * 100 + '%';
+                sparkle.style.top = Math.random() * 100 + '%';
+                sparkle.style.animationDelay = Math.random() * 2 + 's';
+                container.appendChild(sparkle);
+                
+                setTimeout(() => {
+                    sparkle.remove();
+                }, 4000);
+            }
         }
         
         function createRandomSurprise() {
-            if (Math.random() < 0.3) { // 30% chance
+            if (Math.random() < 0.4) {
                 const flower = document.createElement('div');
                 flower.className = 'surprise-flower surprise-appear';
                 flower.textContent = flowers[Math.floor(Math.random() * flowers.length)].emoji;
                 
                 // Random edge position
                 const side = Math.floor(Math.random() * 4);
+                const offset = Math.random() * 0.8 + 0.1; // 10% to 90% of screen
+                
                 switch(side) {
                     case 0: // top
-                        flower.style.left = Math.random() * window.innerWidth + 'px';
-                        flower.style.top = '0px';
+                        flower.style.left = (offset * window.innerWidth) + 'px';
+                        flower.style.top = '-50px';
                         break;
                     case 1: // right
-                        flower.style.left = window.innerWidth + 'px';
-                        flower.style.top = Math.random() * window.innerHeight + 'px';
+                        flower.style.left = (window.innerWidth + 50) + 'px';
+                        flower.style.top = (offset * window.innerHeight) + 'px';
                         break;
                     case 2: // bottom
-                        flower.style.left = Math.random() * window.innerWidth + 'px';
-                        flower.style.top = window.innerHeight + 'px';
+                        flower.style.left = (offset * window.innerWidth) + 'px';
+                        flower.style.top = (window.innerHeight + 50) + 'px';
                         break;
                     case 3: // left
-                        flower.style.left = '0px';
-                        flower.style.top = Math.random() * window.innerHeight + 'px';
+                        flower.style.left = '-50px';
+                        flower.style.top = (offset * window.innerHeight) + 'px';
                         break;
                 }
                 
@@ -350,63 +599,62 @@
                 
                 setTimeout(() => {
                     flower.remove();
-                }, 2000);
-            }
-        }
-        
-        function createSparkles() {
-            const container = document.querySelector('.container');
-            for (let i = 0; i < 6; i++) {
-                const sparkle = document.createElement('div');
-                sparkle.className = 'sparkle';
-                sparkle.textContent = '✨';
-                sparkle.style.left = Math.random() * 100 + '%';
-                sparkle.style.top = Math.random() * 100 + '%';
-                sparkle.style.animationDelay = Math.random() * 2 + 's';
-                container.appendChild(sparkle);
-                
-                // Remove sparkle after animation
-                setTimeout(() => {
-                    sparkle.remove();
                 }, 3000);
             }
         }
         
         function createFloatingHearts() {
             const heartsContainer = document.getElementById('floatingHearts');
+            const heartEmojis = ['💕', '💖', '💗', '💘', '💙', '💚', '💛', '💜'];
             
             setInterval(() => {
                 const heart = document.createElement('div');
                 heart.className = 'heart';
-                heart.textContent = '💕';
+                heart.textContent = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
                 heart.style.left = Math.random() * 100 + '%';
-                heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
                 heartsContainer.appendChild(heart);
                 
-                // Remove heart after animation
                 setTimeout(() => {
                     heart.remove();
-                }, 5000);
+                }, 6000);
             }, 2000);
+        }
+        
+        function createMagicParticles() {
+            const particlesContainer = document.getElementById('magicParticles');
+            
+            setInterval(() => {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                particlesContainer.appendChild(particle);
+                
+                setTimeout(() => {
+                    particle.remove();
+                }, 6000);
+            }, 100);
         }
         
         // Initialize
         document.addEventListener('DOMContentLoaded', function() {
             showNewFlower();
             createFloatingHearts();
+            createMagicParticles();
             
-            // Random surprise flowers every 5-10 seconds
+            // Random surprise flowers
             setInterval(() => {
                 createRandomSurprise();
-            }, 5000 + Math.random() * 5000);
+            }, 4000 + Math.random() * 6000);
+            
+            // Random sparkles
+            setInterval(() => {
+                createMegaSparkles();
+            }, 8000 + Math.random() * 4000);
         });
         
-        // Show new flower on page load
-        window.addEventListener('load', function() {
-            setTimeout(showNewFlower, 1000);
-        });
-        
-        // Add click anywhere for surprise
+        // Touch/click surprise
         document.addEventListener('click', function(e) {
             if (e.target.tagName !== 'BUTTON') {
                 const flower = document.createElement('div');
@@ -418,7 +666,24 @@
                 
                 setTimeout(() => {
                     flower.remove();
-                }, 2000);
+                }, 3000);
+            }
+        });
+        
+        // Touch event for mobile
+        document.addEventListener('touchstart', function(e) {
+            if (e.target.tagName !== 'BUTTON') {
+                const touch = e.touches[0];
+                const flower = document.createElement('div');
+                flower.className = 'surprise-flower surprise-appear';
+                flower.textContent = flowers[Math.floor(Math.random() * flowers.length)].emoji;
+                flower.style.left = touch.clientX + 'px';
+                flower.style.top = touch.clientY + 'px';
+                document.body.appendChild(flower);
+                
+                setTimeout(() => {
+                    flower.remove();
+                }, 3000);
             }
         });
     </script>
